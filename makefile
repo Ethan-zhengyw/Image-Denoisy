@@ -1,7 +1,8 @@
-VPATH=src
+VPATH=src:bin
 
-AddNoise.class: AddNoise.java ImageProcess.class
+AddNoise.class DeNoise.class: DeNoise.java AddNoise.java ImageProcess.class 
 	javac -classpath bin src/AddNoise.java -d bin
+	javac -classpath bin src/DeNoise.java -d bin
 
 ImageProcess.class: ImageProcess.java
 	javac src/ImageProcess.java -d bin
