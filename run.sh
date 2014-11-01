@@ -1,1 +1,1 @@
-java -classpath bin AddNoise src/00.png
+java -classpath bin AddNoise
