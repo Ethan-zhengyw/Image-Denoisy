@@ -1,7 +1,7 @@
 Image-Denoisy
 =============
 
-an assignment for AI course
+an group assignment for AI course
 
 ### Goal
 
@@ -9,13 +9,21 @@ an assignment for AI course
   2. Implement the denoising algorithm base on Simulated annealing algorithm
   3. Train three parameters(H B N) in the algorithm
 
-### Add noisiy
+### Add noisie & Denoisy
     
+  1. add noise to images in images/origin and save to images/noisied
+  
+    ```java
     java -classpath bin AddNoise
-    
-### Denoisy API
-
+    ```
+  2. denoising api
+  
+    ```java
     ImageDenoising_SA.ImageDenoising(h, b, n, path_to_noisied_image)
+    ```
+    
+    be called in .java file
+
 
 ### Trainning parameters
 
@@ -27,7 +35,7 @@ an assignment for AI course
       nohup time ./practice.sh > result.log &
       ```
       
-  2. Default H is from 0.0 to 0.5 step by 0.1
+  2. Default H range: from 0.0 to 0.5 step by 0.1
   3. modify the range of H
 
       ```shell
