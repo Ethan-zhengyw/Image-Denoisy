@@ -11,15 +11,11 @@ an assignment for AI course
 
 ### Add noisiy
     
-    ```java
     java -classpath bin AddNoise
-    ```
     
 ### Denoisy API
 
-    ```java
     ImageDenoising_SA.ImageDenoising(h, b, n, path_to_noisied_image)
-    ```
 
 ### Trainning parameters
 
