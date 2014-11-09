@@ -25,11 +25,36 @@ public class DeNoise {
         return flag;
     }
 
+    public static double judge(int[][] origin, int[][] afterDenoisied) {
+        double result;
+
+        double all = 384 * 256;
+        double same = 0;
+
+        for (int i = 0; i < 384; i++) {
+            for (int j = 0; j < 256; j++) {
+                if (afterDenoisied[i][j] == origin[i][j]) {
+                    same++;
+                }
+            }
+        }
+
+        result = same / all;
+
+        return result;
+    }
+
     public static void main(String[] args) {
 
         ImageProcess imgIO = new ImageProcess();
 
+        double max = 0;
                 for(int i = 10; i < 100; ++i) {
+
+        ImageProcess imgIO_origin = new ImageProcess();
+        int[][] temp_origin = new int[384][256];
+        temp_origin = imgIO_origin.readImage("images/origin/" + String.valueOf(i) + ".png");
+        temp_origin = imgIO_origin.quantize(temp_origin, 384, 256, 2);
 
         for (int jump = 1; jump <= 2; jump++) {
             for (double ran = 0.2; ran < 1; ran += 0.1) {
@@ -71,9 +96,14 @@ public class DeNoise {
                         }
                     }
 
-                    System.out.println("Denoising picture " + String.valueOf(i) + " jump=" + String.valueOf(jump) + "&ran=" + String.valueOf(ran)  + String.valueOf(i));
-                    imgIO.writeImage(temp, 384, 256, "images/denoisied/" + String.valueOf(i) + "_jump=" + String.valueOf(jump) + "&ran=" + String.valueOf(ran) + ".png");
+                    double okRate = judge(temp_origin, temp);
+                    max = okRate > max ? okRate : max;
+
+                    System.out.println("Denoising picture " + String.valueOf(i) + " jump=" + String.valueOf(jump) + "&ran=" + String.valueOf(ran)  + String.valueOf(i) + "&&okRate=" + String.valueOf(okRate));
+                    imgIO.writeImage(temp, 384, 256, "images/denoisied/" + String.valueOf(i) + "_jump=" + String.valueOf(jump) + "&ran=" + String.valueOf(ran) + ".png" + "&&okRate=" + String.valueOf(okRate));
                 }
+
+                System.out.println("Max okRate: " + String.valueOf(max));
             }
         }
     }
